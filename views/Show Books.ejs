@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Books</title>
+    <link rel="stylesheet" href="../stylesheets/nav.css">
+</head>
+<body>
+    <%- include('partials/nav') %>
+<h1 style="text-align: center; margin-bottom: 1vh;">All Books Reposetory 📑📑</h1>
+
+<div class="books-container">
+    <% books.forEach((book) => { %>
+      <div class="book-card">
+      <img src="<%= book.coverImage ? book.coverImage : './uploads/images/cover_image.jpeg' %>" alt="Book Cover">
+       <!-- <img src="<%=book.coverImage%>" alt="Book Cover"> -->
+        <h2><%= book.title %></h2>
+        <p><strong>Author:</strong> <%= book.author %></p>
+        <p><strong>Genre:</strong> <%= book.genre %></p>
+        <p><strong>Year:</strong> <%= book.year %></p>
+        
+        <% if (book.bookFile) { %>
+          <a href="<%= book.bookFile %>" download target="_blank">📥 Download PDF</a>
+        <% } else { %>
+          <p class="no-pdf">📥 PDF not available</p>
+        <% } %>
+
+        <div class="action-buttons">
+          <a href="#" class="btn-edit">✏️ Edit</a>
+          <form action="#" method="POST">
+            <button type="submit" class="btn-delete">🗑️ Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>

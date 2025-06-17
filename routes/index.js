@@ -5,13 +5,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', async (req, res, next) => {
-  try {
-    const books = await BookModel.find(); 
-    res.render('index', { books });
-  } catch (err) {
-    console.log(err);
-    res.status(500).send('Error loading home page');
-  }
+ res.render('index')
 });
 
 // Register page
@@ -38,14 +32,31 @@ router.post('/register', upload.fields([
       bookFile: req.files.bookFile ? '/uploads/pdfs/' + req.files.bookFile[0].filename : ''
     });
 
-    console.log('✅ Book saved:', book);
-    res.redirect('/');
+    // console.log('✅ Book saved:', book);
+    res.redirect('/ShowBooks');
   } catch (err) {
     console.error('❌ Error:', err);
     res.status(500).send("❌ Error saving book");
   }
 });
 
+router.get('/ShowBooks', async (req, res, next) => {
+  try {
+    const books = await BookModel.find();
+    res.render('Show Books',{books})
+  }  catch (err) {
+    console.log(err);
+    res.status(500).send('❌ Error loading home page');
+  }
+});
 
+router.get('/contact', (req,res,next)=>{
+try {
+  res.render('contact');
+} catch (error) {
+ console.log(error);
+  res.send(error)
+}
+})
 
 module.exports = router;

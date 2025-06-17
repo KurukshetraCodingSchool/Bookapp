@@ -14,7 +14,6 @@ body {
   text-align: center;
   margin-top: 30px;
 }
-  
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -49,7 +48,8 @@ body {
   .nav-links li a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 20px;
+    font: 500;
     transition: 0.3s;
   }
   
@@ -67,7 +67,7 @@ body {
     color: white;
     text-align: center;
     padding: 20px;
-    margin-top: 40px;
+    margin-top: 265px;
   }
   
  

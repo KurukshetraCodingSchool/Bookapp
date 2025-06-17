@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../stylesheets/style.css" />
 </head>
 <body>
+  <%- include('partials/nav') %>
   <div class="container">
     <h2>📚 Submit Your Book</h2>
     <form action="/register" method="POST" enctype="multipart/form-data">
@@ -37,7 +38,7 @@
       <textarea id="description" name="description" rows="4" required></textarea>
 
       <label for="coverImage">Cover Image</label>
-      <input type="file" id="coverImage" name="coverImage" accept="image/*" >
+      <input type="file" id="coverImage" name="coverImage" accept="image/*">
 
       <label for="bookFile">Book File (PDF)</label>
       <input type="file" id="bookFile" name="bookFile" accept=".pdf">

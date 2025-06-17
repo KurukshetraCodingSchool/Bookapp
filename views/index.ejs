@@ -8,37 +8,10 @@
 </head>
 <body>
   <%- include('partials/nav') %>
-
+ 
   <div class="main-content">
     <h1>📚 Welcome to BookZone</h1>
     <p>Your online book publishing platform.</p>
-  </div>
-
-  <h2 class="section-title">All Submitted Books</h2>
-  <div class="books-container">
-    <% books.forEach(book => { %>
-      <div class="book-card">
-      <img src="<%= book.coverImage ? book.coverImage : './uploads/images/cover_image.jpeg' %>" alt="Book Cover">
-
-        <h2><%= book.title %></h2>
-        <p><strong>Author:</strong> <%= book.author %></p>
-        <p><strong>Genre:</strong> <%= book.genre %></p>
-        <p><strong>Year:</strong> <%= book.year %></p>
-        
-        <% if (book.bookFile) { %>
-          <a href="<%= book.bookFile %>" download target="_blank">📥 Download PDF</a>
-        <% } else { %>
-          <p class="no-pdf">📥 PDF not available</p>
-        <% } %>
-
-        <div class="action-buttons">
-          <a href="/edit/<%= book._id %>" class="btn-edit">✏️ Edit</a>
-          <form action="/delete/<%= book._id %>" method="POST">
-            <button type="submit" class="btn-delete">🗑️ Delete</button>
-          </form>
-        </div>
-      </div>
-    <% }) %>
   </div>
 
   <footer id="contact">
