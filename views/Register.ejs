@@ -1,16 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bookapp</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Your Book</title>
+  <link rel="stylesheet" href="../stylesheets/style.css" />
 </head>
 <body>
- <form action="/Signup" method="post">
-  <input type="text" placeholder="username" name="username" required>
-  <input type="number" placeholder="number" name="number" required>
-  <input type="password" placeholder="password" name="password" required>
-  <input type="submit" value="Register User">
- </form>
+  <div class="container">
+    <h2>📚 Submit Your Book</h2>
+    <form action="/register" method="POST" enctype="multipart/form-data">
+      
+      <label for="title">Book Title</label>
+      <input type="text" id="title" name="title" required>
+
+      <label for="author">Author Name</label>
+      <input type="text" id="author" name="author" required>
+
+      <label for="genre">Genre</label>
+      <select id="genre" name="genre" required>
+        <option value="">-- Select Genre --</option>
+        <option>Fiction</option>
+        <option>Non-Fiction</option>
+        <option>Romance</option>
+        <option>Horror</option>
+        <option>Thriller</option>
+        <option>Biography</option>
+        <option>Science Fiction</option>
+        <option>Fantasy</option>
+        <option>History</option>
+        <option>Motivational</option>
+        <option>Self-Help</option>
+      </select>
+
+      <label for="description">Book Description</label>
+      <textarea id="description" name="description" rows="4" required></textarea>
+
+      <label for="coverImage">Cover Image</label>
+      <input type="file" id="coverImage" name="coverImage" accept="image/*" >
+
+      <label for="bookFile">Book File (PDF)</label>
+      <input type="file" id="bookFile" name="bookFile" accept=".pdf">
+
+      <label for="year">Publication Year</label>
+      <input type="number" id="year" name="year" min="1900" max="2099" required>
+
+      <label for="email">Contact Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <button type="submit">Submit Book</button>
+    </form>
+  </div>
 </body>
 </html>

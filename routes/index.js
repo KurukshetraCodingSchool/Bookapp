@@ -1,17 +1,51 @@
 var express = require('express');
+const upload = require('../utils/multer');
+const BookModel = require('../models/BookSchema'); 
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', (req,res,next)=> {
-  res.render('index')
+router.get('/', async (req, res, next) => {
+  try {
+    const books = await BookModel.find(); 
+    res.render('index', { books });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error loading home page');
+  }
 });
-// register
-router.get('/Signup', (req,res,next)=> {
-  res.render('Register')
+
+// Register page
+router.get('/register', (req, res, next) => {
+  res.render('Register');
 });
-//Signin 
-router.get('/Signin', (req,res,next)=> {
-  res.render('Signin')
+
+// POST route to save book
+router.post('/register', upload.fields([
+  { name: 'coverImage', maxCount: 1 },
+  { name: 'bookFile', maxCount: 1 }
+]), async (req, res) => {
+  try {
+    const { title, author, genre, description, year, email } = req.body;
+
+    const book = await BookModel.create({
+      title,
+      author,
+      genre,
+      description,
+      year,
+      email,
+      coverImage: req.files.coverImage ? '/uploads/images/' + req.files.coverImage[0].filename : '',
+      bookFile: req.files.bookFile ? '/uploads/pdfs/' + req.files.bookFile[0].filename : ''
+    });
+
+    console.log('✅ Book saved:', book);
+    res.redirect('/');
+  } catch (err) {
+    console.error('❌ Error:', err);
+    res.status(500).send("❌ Error saving book");
+  }
 });
+
+
 
 module.exports = router;

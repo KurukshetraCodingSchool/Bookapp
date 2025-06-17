@@ -1,22 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bookapp</title>
-    <link rel="stylesheet" href="../stylesheets/nav.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BookZone - Online Book Publishing</title>
+  <link rel="stylesheet" href="../stylesheets/nav.css" />
 </head>
 <body>
-   <div class="nav">
-     <div class="left">
-         <h3>Logo</h3>
-     </div>
-        <div class="right">
-            <a href="/">Home</a>
-            <a href="/Signup">Signup</a>
-            <a href="/Signin">Signin</a>
+  <%- include('partials/nav') %>
+
+  <div class="main-content">
+    <h1>📚 Welcome to BookZone</h1>
+    <p>Your online book publishing platform.</p>
+  </div>
+
+  <h2 class="section-title">All Submitted Books</h2>
+  <div class="books-container">
+    <% books.forEach(book => { %>
+      <div class="book-card">
+      <img src="<%= book.coverImage ? book.coverImage : './uploads/images/cover_image.jpeg' %>" alt="Book Cover">
+
+        <h2><%= book.title %></h2>
+        <p><strong>Author:</strong> <%= book.author %></p>
+        <p><strong>Genre:</strong> <%= book.genre %></p>
+        <p><strong>Year:</strong> <%= book.year %></p>
+        
+        <% if (book.bookFile) { %>
+          <a href="<%= book.bookFile %>" download target="_blank">📥 Download PDF</a>
+        <% } else { %>
+          <p class="no-pdf">📥 PDF not available</p>
+        <% } %>
+
+        <div class="action-buttons">
+          <a href="/edit/<%= book._id %>" class="btn-edit">✏️ Edit</a>
+          <form action="/delete/<%= book._id %>" method="POST">
+            <button type="submit" class="btn-delete">🗑️ Delete</button>
+          </form>
         </div>
-    </div>
-  <h1>Home Page</h1>
+      </div>
+    <% }) %>
+  </div>
+
+  <footer id="contact">
+    <h3>Contact Us</h3>
+    <p>Email: help@bookzone.com</p>
+  </footer>
 </body>
 </html>
