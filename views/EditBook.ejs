@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Your Book</title>
+  <link rel="stylesheet" href="../stylesheets/style.css" />
+</head>
+<body>
+  <%- include('partials/nav') %>
+  <div class="container">
+    <h2>📚 Edit Your Book</h2>
+    <form action="/edit/<%= book._id %>" method="POST" enctype="multipart/form-data">
+
+      <label for="title">Book Title</label>
+      <input type="text" id="title" name="title" value="<%= book.title %>" required>
+
+      <label for="author">Author Name</label>
+      <input type="text" id="author" name="author" value="<%= book.author %>" required>
+
+      <label for="genre">Genre</label>
+      <select id="genre" name="genre" required>
+        <option value="">-- Select Genre --</option>
+        <% 
+          const genres = [
+            "Fiction", "Non-Fiction", "Romance", "Horror", "Thriller",
+            "Biography", "Science Fiction", "Fantasy", "History",
+            "Motivational", "Self-Help"
+          ];
+          genres.forEach(function(genre) { 
+        %>
+          <option value="<%= genre %>" <%= book.genre === genre ? "selected" : "" %>><%= genre %></option>
+        <% }); %>
+      </select>
+
+      <label for="description">Book Description</label>
+      <textarea id="description" name="description" rows="4" required><%= book.description %></textarea>
+
+      <label for="coverImage">Cover Image</label>
+      <input type="file" id="coverImage" name="coverImage" accept="image/*">
+
+      <label for="bookFile">Book File (PDF)</label>
+      <input type="file" id="bookFile" name="bookFile" accept=".pdf">
+
+      <label for="year">Publication Year</label>
+      <input type="number" id="year" name="year" value="<%= book.year %>" min="1900" max="2099" required>
+
+      <label for="email">Contact Email</label>
+      <input type="email" id="email" name="email" value="<%= book.email %>" required>
+
+      <button type="submit">Update Book</button>
+    </form>
+  </div>
+</body>
+</html>
